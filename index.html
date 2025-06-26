@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Tetris Battle</title>
+    <title>シンプルなテトリスバトル</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Simple Tetris Battle</h1>
+        <h1>シンプルなテトリスバトル</h1>
         <div class="game-area-wrapper">
             <div class="player-section player1">
                 <h2 class="player-title">プレイヤー1</h2>
-                <canvas id="gameCanvas1" width="240" height="480"></canvas>
+                <canvas id="gameCanvas1" width="300" height="600"></canvas>
                 <div class="controls-panel player-controls">
                     <h3>操作方法</h3>
                     <div class="control-buttons">
-                        <button id="rotateButton1">回転 (W)</button>
-                        <button id="moveLeftButton1">左移動 (A)</button>
-                        <button id="moveRightButton1">右移動 (D)</button>
-                        <button id="softDropButton1">ソフトドロップ (S)</button>
-                        <button id="hardDropButton1">ハードドロップ (Shift)</button>
+                        <button id="rotateButton1" data-player="1" data-action="rotate">回転 (W)</button>
+                        <button id="moveLeftButton1" data-player="1" data-action="moveLeft">左移動 (A)</button>
+                        <button id="moveRightButton1" data-player="1" data-action="moveRight">右移動 (D)</button>
+                        <button id="softDropButton1" data-player="1" data-action="softDrop">ソフトドロップ (S)</button>
+                        <button id="hardDropButton1" data-player="1" data-action="hardDrop">ハードドロップ (Shift)</button>
                     </div>
                 </div>
             </div>
 
             <div class="center-panel">
                 <div id="sharedGameTimer" class="game-timer">時間: 00:00</div>
-                <button id="startButton">ゲーム開始</button>
+                <button id="startButton" class="game-control-button start-button">ゲーム開始</button>
+                <button id="stopGameButton" class="game-control-button stop-button">ゲーム停止</button>
+                <button id="restartButton" class="game-control-button restart-button">やり直し</button>
                 <button id="settingsButton" class="settings-button">設定</button>
             </div>
 
@@ -36,14 +38,14 @@
                 <div class="controls-panel player-controls">
                     <h3>操作方法</h3>
                     <div class="control-buttons">
-                        <button id="rotateButton2">回転 (↑)</button>
-                        <button id="moveLeftButton2">左移動 (←)</button>
-                        <button id="moveRightButton2">右移動 (→)</button>
-                        <button id="softDropButton2">ソフトドロップ (↓)</button>
-                        <button id="hardDropButton2">ハードドロップ (スペース)</button>
+                        <button id="rotateButton2" data-player="2" data-action="rotate">回転 (↑)</button>
+                        <button id="moveLeftButton2" data-player="2" data-action="moveLeft">左移動 (←)</button>
+                        <button id="moveRightButton2" data-player="2" data-action="moveRight">右移動 (→)</button>
+                        <button id="softDropButton2" data-player="2" data-action="softDrop">ソフトドロップ (↓)</button>
+                        <button id="hardDropButton2" data-player="2" data-action="hardDrop">ハードドロップ (スペース)</button>
                     </div>
                 </div>
-                <canvas id="gameCanvas2" width="240" height="480"></canvas>
+                <canvas id="gameCanvas2" width="300" height="600"></canvas>
             </div>
         </div>
     </div>

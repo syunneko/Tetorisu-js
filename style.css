@@ -1,230 +1,192 @@
 body {
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #282c34;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
+    color: #f0f0f0;
     margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
+    overflow: hidden; /* スクロールバーを非表示 */
 }
 
 .game-container {
-    text-align: center;
     background-color: #3a3f47;
-    padding: 30px 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 98vw;
-    min-height: 700px; 
-    max-height: 98vh; 
-    overflow: hidden; 
-    box-sizing: border-box;
+    gap: 25px;
+    /* 全体の最大幅をさらに広げる */
+    max-width: 1800px; /* 例えば1600pxから1800pxに増やす */
+    width: 95%; /* 画面幅の95%を使う */
 }
 
+/* <h1>タイトルを非表示にする */
 h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    display: none;
 }
 
 .game-area-wrapper {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-grow: 1;
-    width: 100%;
-    gap: 30px;
-    padding-top: 20px;
+    /* 要素間の隙間を調整 (キャンバスの幅に合わせて調整) */
+    gap: 80px; /* 60pxから80pxに増やしてみる */
     flex-wrap: wrap;
-    align-content: flex-start;
-    overflow-y: auto;
-    box-sizing: border-box;
-    min-height: 0;
+    width: 100%;
 }
 
 .player-section {
-    display: flex;
-    flex-direction: row; 
-    align-items: flex-start;
-    gap: 15px;
-    max-width: 750px; 
-    min-width: 500px; 
-    flex-grow: 1;
-    flex-shrink: 1;
-    height: auto;
-    box-sizing: border-box;
-    position: relative;
-    padding-top: 40px;
-}
-
-.player-title {
-    font-size: 1.8em;
-    color: #ffd700;
-    position: absolute; 
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 5px;
-    flex-shrink: 0;
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.game-timer {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #ffd700;
-    margin-bottom: 20px;
-    flex-shrink: 0;
-}
-
-canvas {
-    background-color: #000;
-    border: 2px solid #555;
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 12 / 20;
-    min-height: 100px;
-    object-fit: contain;
-    box-sizing: border-box;
-    width: 420px; 
-    height: 700px; 
-    flex-shrink: 0;
-}
-
-.controls-panel {
+    background-color: #2b2f36;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    flex-grow: 1; 
+    /* flex-basis と max-width を調整して、各プレイヤーセクションの横幅を広げる */
+    /* canvas (300px) + padding (2*20px) = 340px が基本サイズ */
+    /* これに余裕を持たせて横幅を広げる */
+    flex-basis: 380px; /* プレイヤーセクションの基準幅を広げる */
+    max-width: 450px; /* プレイヤーセクションの最大幅を広げる */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
-    background-color: #4a4f57;
-    border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-    width: 220px; 
+}
+
+.player-section h2 { order: 1; }
+.player-section canvas { order: 3; margin-bottom: 0; margin-top: 20px; }
+.player-section .controls-panel { order: 2; margin-top: 0; margin-bottom: 20px; }
+
+.player-title {
+    color: #98c379;
     margin-top: 0;
-    flex-shrink: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+canvas {
+    width: 300px; /* HTMLで指定したサイズと一致させるか、ここで固定 */
+    height: 600px;
+    border: 3px solid #61dafb;
+    background-color: #1a1a1a;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.5);
+    border-radius: 5px;
+}
+
+.controls-panel {
+    background-color: #3b4048;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    width: 100%;
     box-sizing: border-box;
-    flex-grow: 1; 
-    max-height: 700px; 
 }
 
 .controls-panel h3 {
-    font-size: 1.2em;
+    color: #e0e0e0;
     margin-top: 0;
     margin-bottom: 10px;
-    color: #ffd700;
-    flex-shrink: 0;
+    font-size: 1.2em;
 }
 
 .control-buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 8px;
-    width: 100%;
-    flex-grow: 1;
-    box-sizing: border-box;
-    overflow-y: auto;
-    padding-right: 5px;
+    justify-content: center;
 }
 
 .control-buttons button,
-#startButton,
-.settings-button,
-#saveKeysButton,
-#resetKeysButton {
-    padding: 10px 15px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #666;
+.game-control-button,
+.settings-button {
+    background-color: #555;
     color: white;
     border: none;
+    padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
     transition: background-color 0.2s ease, transform 0.1s ease;
-    width: 100%;
-    flex-shrink: 0;
-    box-sizing: border-box;
+    min-width: 100px;
+}
+
+.control-buttons button:hover,
+.game-control-button:hover,
+.settings-button:hover {
+    background-color: #777;
+    transform: translateY(-2px);
 }
 
 .control-buttons button:active,
-#startButton:active,
-.settings-button:active,
-#saveKeysButton:active,
-#resetKeysButton:active {
-    transform: translateY(1px);
+.game-control-button:active,
+.settings-button:active {
+    transform: translateY(0);
 }
 
-#rotateButton1, #rotateButton2 { background-color: #007bff; }
-#rotateButton1:hover, #rotateButton2:hover { background-color: #0056b3; }
+.control-buttons button:disabled,
+.game-control-button:disabled,
+.settings-button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
 
-#moveLeftButton1, #moveRightButton1, #softDropButton1,
-#moveLeftButton2, #moveRightButton2, #softDropButton2 { background-color: #343a40; }
-#moveLeftButton1:hover, #moveRightButton1:hover, #softDropButton1:hover,
-#moveLeftButton2:hover, #moveRightButton2:hover, #softDropButton2:hover { background-color: #1d2124; }
+.start-button {
+    background-color: #4CAF50;
+}
+.start-button:hover {
+    background-color: #45a049;
+}
 
-#hardDropButton1, #hardDropButton2 { background-color: #dc3545; }
-#hardDropButton1:hover, #hardDropButton2:hover { background-color: #bd2130; }
+.stop-button {
+    background-color: #f44336;
+}
+.stop-button:hover {
+    background-color: #da190b;
+}
+
+.restart-button {
+    background-color: #008CBA;
+}
+.restart-button:hover {
+    background-color: #007bb5;
+}
 
 .center-panel {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    flex-basis: 200px;
-    min-width: 150px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    padding: 10px;
-    box-sizing: border-box;
+    gap: 15px;
+    padding: 20px;
+    background-color: #2b2f36;
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
 }
 
-#startButton {
-    background-color: #4CAF50;
+.game-timer {
     font-size: 1.5em;
-    padding: 15px 20px;
-    margin-top: 10px;
-}
-#startButton:hover {
-    background-color: #45a049;
+    color: #e0e0e0;
+    padding: 10px 0;
+    width: 100%;
 }
 
-.settings-button {
-    background-color: #6c757d;
-    margin-top: 10px;
-}
-.settings-button:hover {
-    background-color: #5a6268;
-}
-
-.player1 .controls-panel {
-    order: 2;
-}
-
-.player2 .controls-panel {
-    order: 0;
-}
-
-/* --- モーダル (ポップアップ) スタイル --- */
+/* --- 設定モーダル --- */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.7);
-    backdrop-filter: blur(5px);
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -233,27 +195,30 @@ canvas {
     background-color: #3a3f47;
     margin: auto;
     padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    width: 90%;
-    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     position: relative;
-    color: #ffffff;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-sizing: border-box;
+    color: #f0f0f0;
+}
+
+.modal-content h2 {
+    color: #61dafb;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .close-button {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 15px;
     cursor: pointer;
-    transition: color 0.2s ease;
 }
 
 .close-button:hover,
@@ -263,24 +228,16 @@ canvas {
     cursor: pointer;
 }
 
-.modal-content h2 {
-    text-align: center;
-    color: #ffd700;
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 2em;
-}
-
 .player-key-settings {
-    background-color: #2c3036;
-    padding: 20px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #2b2f36;
     border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: left;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
 }
 
 .player-key-settings h3 {
-    color: #007bff;
+    color: #98c379;
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.5em;
@@ -296,231 +253,92 @@ canvas {
 }
 
 .key-input-group label {
-    flex-basis: 120px;
+    flex: 1;
+    text-align: left;
     font-size: 1.1em;
-    color: #ccc;
-    text-align: right;
-    flex-shrink: 0;
 }
 
 .key-input-group input[type="text"] {
-    flex-grow: 1;
+    flex: 2;
     padding: 8px 12px;
-    font-size: 1.1em;
-    background-color: #4a4f57;
     border: 1px solid #555;
     border-radius: 5px;
-    color: #ffd700;
-    cursor: pointer;
+    background-color: #444;
+    color: #f0f0f0;
+    font-size: 1.1em;
     text-align: center;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
 }
 
 .key-input-group input[type="text"]:focus {
-    border-color: #007bff;
-    background-color: #5a6268;
     outline: none;
+    border-color: #61dafb;
+    box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
 }
 
-#saveKeysButton,
-#resetKeysButton {
-    margin-top: 20px;
-    padding: 12px 20px;
+.modal-content button {
+    background-color: #61dafb;
+    color: #282c34;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 1.1em;
-    width: auto;
-    min-width: 150px;
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 15px;
 }
 
-#saveKeysButton {
-    background-color: #28a745;
-}
-#saveKeysButton:hover {
-    background-color: #218838;
+.modal-content button:hover {
+    background-color: #8be9fd;
+    transform: translateY(-2px);
 }
 
-#resetKeysButton {
-    background-color: #dc3545;
+.modal-content button#resetKeysButton {
+    background-color: #f44336;
+    margin-left: 15px;
 }
-#resetKeysButton:hover {
-    background-color: #c82333;
+.modal-content button#resetKeysButton:hover {
+    background-color: #da190b;
 }
 
-
-/* --- メディアクエリ --- */
-
-@media (max-width: 900px) {
-    .game-container {
-        min-height: auto;
-        max-height: none;
-        padding: 20px 10px;
-    }
-
-    h1 {
-        margin-bottom: 15px;
-    }
-
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
     .game-area-wrapper {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-        height: auto;
-        overflow-y: auto;
-        padding-top: 10px;
+        gap: 30px;
     }
-
     .player-section {
-        flex-direction: column;
-        align-items: center;
-        width: 90%;
-        max-width: 400px;
-        height: auto;
-        flex-basis: auto;
-        padding-top: 30px;
-    }
-    
-    .player-title {
-        top: -20px;
-        font-size: 1.5em;
-    }
-
-    canvas {
-        max-width: 100%;
-        height: auto;
-        width: auto; 
-        height: auto;
-        aspect-ratio: 12 / 20; 
-    }
-
-    .controls-panel {
         width: 100%;
-        margin-top: 10px;
-        max-height: none;
+        max-width: 400px;
+        flex-basis: auto;
     }
-
-    .player1 .controls-panel,
-    .player2 .controls-panel {
-        order: unset; 
-    }
-
     .center-panel {
-        width: 90%;
+        width: 100%;
         max-width: 300px;
-        height: auto;
-        margin-top: 20px;
-        order: -1;
     }
-
-    #startButton {
-        margin-top: 0;
+    .control-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-
-    /* モーダル */
+    .control-buttons button {
+        min-width: 100px;
+        width: auto;
+        flex-grow: 1;
+    }
     .modal-content {
+        width: 90%;
         padding: 20px;
-        width: 95%;
-    }
-    .modal-content h2 {
-        font-size: 1.8em;
-        margin-bottom: 20px;
-    }
-    .player-key-settings {
-        padding: 15px;
-    }
-    .player-key-settings h3 {
-        font-size: 1.3em;
-        margin-bottom: 10px;
     }
     .key-input-group {
         flex-direction: column;
         align-items: flex-start;
         gap: 5px;
     }
-    .key-input-group label {
-        width: 100%;
-        text-align: left;
-    }
-    .key-input-group input[type="text"] {
-        width: 100%;
-        text-align: left;
-    }
-    #saveKeysButton,
-    #resetKeysButton {
-        width: 100%;
-        display: block;
-        margin: 10px auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .game-container {
-        padding: 5px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
-
-    .player-title {
-        font-size: 1.3em;
-    }
-
-    .game-timer {
-        font-size: 0.9em;
-        margin-bottom: 5px;
-    }
-
-    .controls-panel {
-        padding: 10px;
-    }
-
-    .controls-panel h3 {
-        font-size: 0.9em;
-        margin-bottom: 5px;
-    }
-
-    .control-buttons {
-        gap: 5px;
-    }
-
-    .control-buttons button,
-    #startButton,
-    .settings-button,
-    #saveKeysButton,
-    #resetKeysButton {
-        padding: 6px 8px;
-        font-size: 0.8em;
-    }
-
-    #startButton {
-        font-size: 1em;
-        padding: 10px 12px;
-    }
-
-    /* モーダル */
-    .modal-content {
-        padding: 15px;
-    }
-    .modal-content h2 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
-    }
-    .player-key-settings {
-        padding: 10px;
-    }
-    .player-key-settings h3 {
-        font-size: 1.2em;
-    }
     .key-input-group label,
     .key-input-group input[type="text"] {
-        font-size: 1em;
-    }
-    #saveKeysButton,
-    #resetKeysButton {
-        padding: 8px 12px;
-        font-size: 0.9em;
+        width: 100%;
+        text-align: left;
     }
 }
