@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Tetris Battle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Simple Tetris Battle</h1>
+        <div class="game-area-wrapper">
+            <div class="player-section player1">
+                <h2 class="player-title">プレイヤー1</h2>
+                <canvas id="gameCanvas1" width="240" height="480"></canvas>
+                <div class="controls-panel player-controls">
+                    <h3>操作方法</h3>
+                    <div class="control-buttons">
+                        <button id="rotateButton1">回転 (W)</button>
+                        <button id="moveLeftButton1">左移動 (A)</button>
+                        <button id="moveRightButton1">右移動 (D)</button>
+                        <button id="softDropButton1">ソフトドロップ (S)</button>
+                        <button id="hardDropButton1">ハードドロップ (Shift)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-panel">
+                <div id="sharedGameTimer" class="game-timer">時間: 00:00</div>
+                <button id="startButton">ゲーム開始</button>
+                <button id="settingsButton" class="settings-button">設定</button>
+            </div>
+
+            <div class="player-section player2">
+                <h2 class="player-title">プレイヤー2</h2>
+                <div class="controls-panel player-controls">
+                    <h3>操作方法</h3>
+                    <div class="control-buttons">
+                        <button id="rotateButton2">回転 (↑)</button>
+                        <button id="moveLeftButton2">左移動 (←)</button>
+                        <button id="moveRightButton2">右移動 (→)</button>
+                        <button id="softDropButton2">ソフトドロップ (↓)</button>
+                        <button id="hardDropButton2">ハードドロップ (スペース)</button>
+                    </div>
+                </div>
+                <canvas id="gameCanvas2" width="240" height="480"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>キーボード設定</h2>
+
+            <div class="player-key-settings">
+                <h3>プレイヤー1</h3>
+                <div class="key-input-group">
+                    <label for="p1-rotate">回転:</label>
+                    <input type="text" id="p1-rotate" data-action="rotate" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p1-left">左移動:</label>
+                    <input type="text" id="p1-left" data-action="moveLeft" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p1-right">右移動:</label>
+                    <input type="text" id="p1-right" data-action="moveRight" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p1-soft-drop">ソフトドロップ:</label>
+                    <input type="text" id="p1-soft-drop" data-action="softDrop" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p1-hard-drop">ハードドロップ:</label>
+                    <input type="text" id="p1-hard-drop" data-action="hardDrop" readonly>
+                </div>
+            </div>
+
+            <div class="player-key-settings">
+                <h3>プレイヤー2</h3>
+                <div class="key-input-group">
+                    <label for="p2-rotate">回転:</label>
+                    <input type="text" id="p2-rotate" data-action="rotate" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p2-left">左移動:</label>
+                    <input type="text" id="p2-left" data-action="moveLeft" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p2-right">右移動:</label>
+                    <input type="text" id="p2-right" data-action="moveRight" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p2-soft-drop">ソフトドロップ:</label>
+                    <input type="text" id="p2-soft-drop" data-action="softDrop" readonly>
+                </div>
+                <div class="key-input-group">
+                    <label for="p2-hard-drop">ハードドロップ:</label>
+                    <input type="text" id="p2-hard-drop" data-action="hardDrop" readonly>
+                </div>
+            </div>
+
+            <button id="saveKeysButton">設定を保存</button>
+            <button id="resetKeysButton">デフォルトに戻す</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
